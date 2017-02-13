@@ -11,8 +11,10 @@ class QListView;
 namespace installer {
 
 class NavButton;
+class PackageListModel;
 class VersionListModel;
 
+// To display packages to be installed into target system.
 class PackageListFrame : public QFrame {
   Q_OBJECT
 
@@ -26,10 +28,16 @@ class PackageListFrame : public QFrame {
   void initConnections();
   void initUI();
 
-  NavButton* next_button_ = nullptr;
   QListView* version_view_ = nullptr;
   VersionListModel* version_model_ = nullptr;
-  QListView* packages_view_ = nullptr;
+  QListView* package_view_ = nullptr;
+  PackageListModel* package_model_ = nullptr;
+
+  NavButton* next_button_ = nullptr;
+
+ private slots:
+  void onVersionViewSelectionChanged(const QModelIndex& current,
+                                     const QModelIndex& previous);
 };
 
 }  // namespace installer
