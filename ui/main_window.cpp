@@ -25,6 +25,7 @@
 #include "ui/frames/install_failed_frame.h"
 #include "ui/frames/install_progress_frame.h"
 #include "ui/frames/install_success_frame.h"
+#include "ui/frames/package_list_frame.h"
 #include "ui/frames/partition_frame.h"
 #include "ui/frames/partition_table_warning_frame.h"
 #include "ui/frames/select_language_frame.h"
@@ -104,6 +105,9 @@ void MainWindow::initConnections() {
   connect(install_success_frame_, &InstallSuccessFrame::finished,
           this, &MainWindow::rebootSystem);
 
+  connect(package_list_frame_, &PackageListFrame::finished,
+          this, &MainWindow::goNextPage);
+
   connect(partition_frame_, &PartitionFrame::finished,
           this, &MainWindow::goNextPage);
 
@@ -164,6 +168,10 @@ void MainWindow::initPages() {
   install_success_frame_ = new InstallSuccessFrame(this);
   pages_.insert(PageId::InstallSuccessId,
                 stacked_layout_->addWidget(install_success_frame_));
+
+  package_list_frame_ = new PackageListFrame(this);
+  pages_.insert(PageId::PackageListId,
+                stacked_layout_->addWidget(package_list_frame_));
 
   partition_frame_ = new PartitionFrame(this);
   pages_.insert(PageId::PartitionId,
@@ -314,6 +322,7 @@ void MainWindow::goNextPage() {
   //   * disk space insufficient page;
   //   * virtual machine page;
   //   * partition table warning page;
+  //   * package list page;
   //   * system info page;
   //   * partition page;
   //   * install progress page;
@@ -383,9 +392,20 @@ void MainWindow::goNextPage() {
     case PageId::PartitionTableWarningId: {
       // Check whether to show SystemInfoPage.
       system_info_frame_->readConf();
-      if (GetSettingsBool(kSkipSystemInfoPage)) {
+      if (GetSettingsBool(kSkipPackageListPage)) {
         system_info_frame_->writeConf();
         prev_page_ = current_page_;
+        current_page_ = PageId::SystemInfoId;
+        this->goNextPage();
+      } else {
+        page_indicator_->goNextPage();
+        this->setCurrentPage(PageId::PackageListId);
+      }
+      break;
+    }
+
+    case PageId::PackageListId: {
+      if (GetSettingsBool(kSkipSystemInfoPage)) {
         current_page_ = PageId::SystemInfoId;
         this->goNextPage();
       } else {

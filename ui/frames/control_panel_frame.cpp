@@ -137,6 +137,7 @@ void ControlPanelFrame::initUI() {
                              "InstallFailedFrame",
                              "InstallProgressFrame",
                              "InstallSuccessFrame",
+                             "PackageListFrame",
                              "PartitionFrame",
                              "PartitionTableWarningFrame",
                              "SelectLanguageFrame",

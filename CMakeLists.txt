@@ -135,6 +135,8 @@ set(SERVICE_FILES
     service/hooks_manager.h
     service/log_manager.cpp
     service/log_manager.h
+    service/package_list.cpp
+    service/package_list.h
     service/power_manager.cpp
     service/power_manager.h
     service/settings_manager.cpp
@@ -234,6 +236,8 @@ set(UI_FILES
     ui/frames/install_progress_frame.h
     ui/frames/install_success_frame.cpp
     ui/frames/install_success_frame.h
+    ui/frames/package_list_frame.cpp
+    ui/frames/package_list_frame.h
     ui/frames/partition_frame.cpp
     ui/frames/partition_frame.h
     ui/frames/partition_table_warning_frame.cpp
@@ -324,7 +328,7 @@ set(UI_FILES
     ui/xrandr/multi_head_worker.h
     ui/xrandr/xrandr_wrapper.cpp
     ui/xrandr/xrandr_wrapper.h
-    )
+    ui/models/version_list_model.cpp ui/models/version_list_model.h)
 
 set(ROOT_UNITTEST_FILES
     #    partman/operation_test.cpp
@@ -354,6 +358,10 @@ set(UNITTEST_FILES
     sysinfo/validate_hostname_test.cpp
     sysinfo/validate_password_test.cpp
     sysinfo/validate_username_test.cpp
+
+    service/package_list.cpp
+    service/package_list.h
+    service/package_list_test.cpp
 
     ui/delegates/timezone_map_util_test.cpp
     )

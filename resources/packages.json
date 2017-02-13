@@ -1,0 +1,29 @@
+[
+  {
+    "name": "desktop",
+    "displayName": "Deepin Desktop for SW",
+    "availablePackages": [
+      "gparted",
+      "chromium",
+      "firefox"
+    ],
+    "selectedPackages": [
+      "firefox"
+    ]
+  },
+  {
+    "name": "server",
+    "displayName": "Deepin Server for SW",
+    "availablePackages": [
+      "openssh",
+      "nginx",
+      "apache",
+      "mysql",
+      "redis"
+    ],
+    "selectedPackages": [
+      "openssh",
+      "redis"
+    ]
+  }
+]

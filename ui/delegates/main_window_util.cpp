@@ -42,6 +42,9 @@ int GetVisiblePages() {
   if (!GetSettingsBool(kSkipSelectLanguagePage)) {
     pages += 1;
   }
+  if (!GetSettingsBool(kSkipPackageListPage)) {
+    pages += 1;
+  }
   if (!GetSettingsBool(kSkipSystemInfoPage)) {
     pages += 1;
   }
