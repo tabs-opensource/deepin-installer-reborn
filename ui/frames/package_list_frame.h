@@ -12,8 +12,10 @@ class QListView;
 
 namespace installer {
 
+class CommentLabel;
 class NavButton;
 class PackageListModel;
+class TitleLabel;
 class VersionListModel;
 
 // To display packages to be installed into target system.
@@ -26,9 +28,15 @@ class PackageListFrame : public QFrame {
  signals:
   void finished();
 
+ protected:
+  void changeEvent(QEvent* event) override;
+
  private:
   void initConnections();
   void initUI();
+
+  TitleLabel* title_label_ = nullptr;
+  CommentLabel* comment_label_ = nullptr;
 
   QListView* version_view_ = nullptr;
   VersionListModel* version_model_ = nullptr;

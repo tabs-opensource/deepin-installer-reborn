@@ -4,6 +4,7 @@
 
 #include "ui/frames/package_list_frame.h"
 
+#include <QEvent>
 #include <QVBoxLayout>
 
 #include "base/file_util.h"
@@ -25,6 +26,16 @@ PackageListFrame::PackageListFrame(QWidget* parent) : QFrame(parent) {
   this->initConnections();
 }
 
+void PackageListFrame::changeEvent(QEvent* event) {
+  if (event->type() == QEvent::LanguageChange) {
+    title_label_->setText(tr("Select Packages"));
+    comment_label_->setText(tr("Select OS type and packages to install"));
+    next_button_->setText(tr("Next"));
+  } else {
+    QFrame::changeEvent(event);
+  }
+}
+
 void PackageListFrame::initConnections() {
   connect(version_view_->selectionModel(), &QItemSelectionModel::currentChanged,
           this, &PackageListFrame::onVersionViewSelectionChanged);
@@ -38,12 +49,13 @@ void PackageListFrame::initConnections() {
 }
 
 void PackageListFrame::initUI() {
-  TitleLabel* title_label = new TitleLabel("Select Packages");
-  CommentLabel* comment_label = new CommentLabel("Select packages to install");
+  title_label_ = new TitleLabel(tr("Select Packages"));
+  comment_label_ = new CommentLabel(
+      tr("Select OS type and packages to install"));
   QHBoxLayout* comment_layout = new QHBoxLayout();
   comment_layout->setContentsMargins(0, 0, 0, 0);
   comment_layout->setSpacing(0);
-  comment_layout->addWidget(comment_label);
+  comment_layout->addWidget(comment_label_);
 
   version_view_ = new FramelessListView();
   version_view_->setObjectName("version_view");
@@ -78,12 +90,12 @@ void PackageListFrame::initUI() {
   package_size_policy.setVerticalStretch(1);
   package_frame->setSizePolicy(package_size_policy);
 
-  next_button_ = new NavButton("Next");
+  next_button_ = new NavButton(tr("Next"));
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setSpacing(kMainLayoutSpacing);
   layout->addStretch();
-  layout->addWidget(title_label, 0, Qt::AlignHCenter);
+  layout->addWidget(title_label_, 0, Qt::AlignHCenter);
   layout->addLayout(comment_layout, 0);
   layout->addStretch();
   layout->addWidget(package_frame, 0, Qt::AlignHCenter);
