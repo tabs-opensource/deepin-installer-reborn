@@ -7,6 +7,7 @@
 #include <QVBoxLayout>
 
 #include "base/file_util.h"
+#include "service/settings_manager.h"
 #include "ui/frames/consts.h"
 #include "ui/models/package_list_model.h"
 #include "ui/models/version_list_model.h"
@@ -28,9 +29,12 @@ void PackageListFrame::initConnections() {
   connect(version_view_->selectionModel(), &QItemSelectionModel::currentChanged,
           this, &PackageListFrame::onVersionViewSelectionChanged);
 
+  connect(package_view_->selectionModel(),
+          &QItemSelectionModel::selectionChanged,
+          this, &PackageListFrame::onPackageViewSelectionChanged);
 
   connect(next_button_, &QPushButton::clicked,
-          this, &PackageListFrame::finished);
+          this, &PackageListFrame::onNextButtonClicked);
 }
 
 void PackageListFrame::initUI() {
@@ -98,7 +102,56 @@ void PackageListFrame::onVersionViewSelectionChanged(
       version_model_->getSelectedPackages(current);
   const QStringList avail_packs =
       version_model_->getAvailablePackages(current);
-  package_model_->setPackage(avail_packs);
+
+  // Update package list and selected packages.
+  package_model_->setPackages(avail_packs);
+
+  QItemSelection selected;
+  for (const QString& package : selected_packs) {
+    const QModelIndex index = package_model_->getPackageIndex(package);
+    selected.select(index, index);
+    package_model_->getPackageIndex(package);
+  }
+
+  // Block signals when update selections.
+  package_view_->blockSignals(true);
+  package_view_->selectionModel()->select(selected,
+                                          QItemSelectionModel::Select);
+  package_view_->blockSignals(false);
+}
+
+void PackageListFrame::onPackageViewSelectionChanged(
+    const QItemSelection& selected, const QItemSelection& deselected) {
+  Q_UNUSED(selected);
+  Q_UNUSED(deselected);
+
+  // Read all selected packages.
+  const QModelIndexList selected_indexes =
+      package_view_->selectionModel()->selectedIndexes();
+  QStringList selected_packages;
+  for (const QModelIndex& index : selected_indexes) {
+    selected_packages.append(package_model_->getPackage(index));
+  }
+
+  const QModelIndex index = version_view_->selectionModel()->currentIndex();
+  version_model_->setSelectedPackages(selected_packages, index);
+}
+
+void PackageListFrame::onNextButtonClicked() {
+  // Read all selected packages.
+  const QModelIndexList selected_indexes =
+      package_view_->selectionModel()->selectedIndexes();
+  QStringList selected_packages;
+  for (const QModelIndex& index : selected_indexes) {
+    selected_packages.append(package_model_->getPackage(index));
+  }
+
+  const QModelIndex index = version_view_->selectionModel()->currentIndex();
+  const QString name =version_model_->getName(index);
+
+  WriteSelectedPackageList(name, selected_packages);
+
+  emit this->finished();
 }
 
 }  // namespace installer

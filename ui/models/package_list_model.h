@@ -19,8 +19,14 @@ class PackageListModel : public QAbstractListModel {
   virtual QVariant data(const QModelIndex& index, int role) const override;
   virtual int rowCount(const QModelIndex& parent) const override;
 
+  // Get package name at |index|.
+  QString getPackage(const QModelIndex& index) const;
+
+  // Get package index with |package| name.
+  QModelIndex getPackageIndex(const QString& package) const;
+
   // Update package list.
-  void setPackage(const QStringList& packages);
+  void setPackages(const QStringList& packages);
 
  private:
   QStringList packages_;

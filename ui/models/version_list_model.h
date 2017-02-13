@@ -22,13 +22,17 @@ class VersionListModel : public QAbstractListModel {
   virtual int rowCount(const QModelIndex& parent) const override;
 
   // Get version name at |index|.
-  QString getName(const QModelIndex& index);
-
-  // Get selected packages at |index|.
-  QStringList getSelectedPackages(const QModelIndex& index);
+  QString getName(const QModelIndex& index) const;
 
   // Get available packages at |index|.
-  QStringList getAvailablePackages(const QModelIndex& index);
+  QStringList getAvailablePackages(const QModelIndex& index) const;
+
+  // Get selected packages at |index|.
+  QStringList getSelectedPackages(const QModelIndex& index) const;
+
+  // Update selected package list at |index|.
+  void setSelectedPackages(const QStringList& selected_packages,
+                           const QModelIndex& index);
 
  private:
   PackageList package_list_;

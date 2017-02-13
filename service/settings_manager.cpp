@@ -286,6 +286,13 @@ void WriteRequiringSwapFile(bool is_required) {
   AppendToConfigFile("DI_SWAP_FILE_REQUIRED", is_required);
 }
 
+void WriteSelectedPackageList(const QString& name,
+                              const QStringList& packages) {
+  AppendToConfigFile("DI_SW_OS_NAME", name);
+  // Join package list with semicolons.
+  AppendToConfigFile("DI_SW_SELECTED_PACKAGES", packages.join(";"));
+}
+
 void AddConfigFile() {
   QSettings target_settings(kInstallerConfigFile, QSettings::IniFormat);
 

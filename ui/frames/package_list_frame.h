@@ -6,6 +6,8 @@
 #define INSTALLER_UI_FRAMES_PACKAGE_LIST_FRAME_H_
 
 #include <QFrame>
+#include <QtCore/QItemSelection>
+
 class QListView;
 
 namespace installer {
@@ -36,8 +38,18 @@ class PackageListFrame : public QFrame {
   NavButton* next_button_ = nullptr;
 
  private slots:
+  // Update package list in package_view_ when new package is selected in
+  // version_view_.
   void onVersionViewSelectionChanged(const QModelIndex& current,
                                      const QModelIndex& previous);
+
+  // Update selected package list in version_view_ when package selection state
+  // is updated in package_view_.
+  void onPackageViewSelectionChanged(const QItemSelection& selected,
+                                     const QItemSelection& deselected);
+
+  // Save current package selection state when next_button_ is clicked.
+  void onNextButtonClicked();
 };
 
 }  // namespace installer

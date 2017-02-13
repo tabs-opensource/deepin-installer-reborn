@@ -29,27 +29,41 @@ int VersionListModel::rowCount(const QModelIndex& parent) const {
   return package_list_.length();
 }
 
-QString VersionListModel::getName(const QModelIndex& index) {
+QString VersionListModel::getName(const QModelIndex& index) const {
   const int row = index.row();
   if (index.isValid() && row < package_list_.length()) {
     return package_list_.at(row).name;
+  } else {
+    return QString();
   }
-  return QString();
 }
 
-QStringList VersionListModel::getSelectedPackages(const QModelIndex& index) {
-  const int row = index.row();
-  if (index.isValid() && row < package_list_.length()) {
-    return package_list_.at(row).selected_packages;
-  }
-  return QStringList();
-}
-
-QStringList VersionListModel::getAvailablePackages(const QModelIndex& index) {
+QStringList VersionListModel::getAvailablePackages(
+    const QModelIndex& index) const {
   const int row = index.row();
   if (index.isValid() && row < package_list_.length()) {
     return package_list_.at(row).available_packages;
+  } else {
+    return QStringList();
   }
-  return QStringList();}
+}
+
+QStringList VersionListModel::getSelectedPackages(
+    const QModelIndex& index) const {
+  const int row = index.row();
+  if (index.isValid() && row < package_list_.length()) {
+    return package_list_.at(row).selected_packages;
+  } else {
+    return QStringList();
+  }
+}
+
+void VersionListModel::setSelectedPackages(const QStringList& selected_packages,
+                                           const QModelIndex& index) {
+  const int row = index.row();
+  if (index.isValid() && row < package_list_.length()) {
+    package_list_[row].selected_packages = selected_packages;
+  }
+}
 
 }  // namespace installer
