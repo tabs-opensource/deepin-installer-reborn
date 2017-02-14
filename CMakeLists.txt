@@ -146,7 +146,7 @@ set(SERVICE_FILES
     service/settings_name.h
     service/timezone_manager.cpp
     service/timezone_manager.h
-    )
+    service/kernel_list.cpp service/kernel_list.h)
 
 set(SYSINFO_FILES
     sysinfo/dev_disk.cpp
@@ -267,8 +267,8 @@ set(UI_FILES
     ui/models/package_list_model.h
     ui/models/partition_type_model.cpp
     ui/models/partition_type_model.h
-    ui/models/version_list_model.cpp
-    ui/models/version_list_model.h
+    ui/models/kernel_list_model.cpp
+    ui/models/kernel_list_model.h
 
     ui/utils/widget_util.cpp
     ui/utils/widget_util.h
@@ -332,7 +332,7 @@ set(UI_FILES
     ui/xrandr/multi_head_worker.h
     ui/xrandr/xrandr_wrapper.cpp
     ui/xrandr/xrandr_wrapper.h
-    )
+    ui/frames/inner/services_package_frame.cpp ui/frames/inner/services_package_frame.h ui/frames/inner/select_kernel_frame.cpp ui/frames/inner/select_kernel_frame.h)
 
 set(ROOT_UNITTEST_FILES
     #    partman/operation_test.cpp
@@ -363,12 +363,16 @@ set(UNITTEST_FILES
     sysinfo/validate_password_test.cpp
     sysinfo/validate_username_test.cpp
 
+    service/kernel_list.cpp
+    service/kernel_list.h
+    service/kernel_list_test.cpp
+
     service/package_list.cpp
     service/package_list.h
     service/package_list_test.cpp
 
     ui/delegates/timezone_map_util_test.cpp
-    )
+    service/kernel_list_test.cpp)
 
 
 set(QtCore_LIBS Qt5::Core)

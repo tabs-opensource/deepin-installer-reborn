@@ -2,17 +2,17 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#include "ui/models/version_list_model.h"
+#include "ui/models/kernel_list_model.h"
 
 namespace installer {
 
-VersionListModel::VersionListModel(QObject* parent)
+KernelListModel::KernelListModel(QObject* parent)
     : QAbstractListModel(parent),
       package_list_(GetPackageList()) {
-  this->setObjectName("version_list_model");
+  this->setObjectName("kernel_list_model");
 }
 
-QVariant VersionListModel::data(const QModelIndex& index, int role) const {
+QVariant KernelListModel::data(const QModelIndex& index, int role) const {
   if (role != Qt::DisplayRole) {
     return QVariant();
   }
@@ -24,12 +24,12 @@ QVariant VersionListModel::data(const QModelIndex& index, int role) const {
   }
 }
 
-int VersionListModel::rowCount(const QModelIndex& parent) const {
+int KernelListModel::rowCount(const QModelIndex& parent) const {
   Q_UNUSED(parent);
   return package_list_.length();
 }
 
-QString VersionListModel::getName(const QModelIndex& index) const {
+QString KernelListModel::getName(const QModelIndex& index) const {
   const int row = index.row();
   if (index.isValid() && row < package_list_.length()) {
     return package_list_.at(row).name;
@@ -38,7 +38,7 @@ QString VersionListModel::getName(const QModelIndex& index) const {
   }
 }
 
-QStringList VersionListModel::getAvailablePackages(
+QStringList KernelListModel::getAvailablePackages(
     const QModelIndex& index) const {
   const int row = index.row();
   if (index.isValid() && row < package_list_.length()) {
@@ -48,7 +48,7 @@ QStringList VersionListModel::getAvailablePackages(
   }
 }
 
-QStringList VersionListModel::getSelectedPackages(
+QStringList KernelListModel::getSelectedPackages(
     const QModelIndex& index) const {
   const int row = index.row();
   if (index.isValid() && row < package_list_.length()) {
@@ -58,7 +58,7 @@ QStringList VersionListModel::getSelectedPackages(
   }
 }
 
-void VersionListModel::setSelectedPackages(const QStringList& selected_packages,
+void KernelListModel::setSelectedPackages(const QStringList& selected_packages,
                                            const QModelIndex& index) {
   const int row = index.row();
   if (index.isValid() && row < package_list_.length()) {

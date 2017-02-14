@@ -12,11 +12,11 @@
 namespace installer {
 
 // Model used in PackageListModel to hold system type.
-class VersionListModel : public QAbstractListModel {
+class KernelListModel : public QAbstractListModel {
   Q_OBJECT
 
  public:
-  explicit VersionListModel(QObject* parent = nullptr);
+  explicit KernelListModel(QObject* parent = nullptr);
 
   virtual QVariant data(const QModelIndex& index, int role) const override;
   virtual int rowCount(const QModelIndex& parent) const override;

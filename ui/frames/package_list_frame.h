@@ -6,17 +6,12 @@
 #define INSTALLER_UI_FRAMES_PACKAGE_LIST_FRAME_H_
 
 #include <QFrame>
-#include <QtCore/QItemSelection>
-
-class QListView;
+class QStackedLayout;
 
 namespace installer {
 
-class CommentLabel;
-class NavButton;
-class PackageListModel;
-class TitleLabel;
-class VersionListModel;
+class SelectKernelFrame;
+class ServicesPackageFrame;
 
 // To display packages to be installed into target system.
 class PackageListFrame : public QFrame {
@@ -28,36 +23,19 @@ class PackageListFrame : public QFrame {
  signals:
   void finished();
 
- protected:
-  void changeEvent(QEvent* event) override;
-
  private:
   void initConnections();
   void initUI();
 
-  TitleLabel* title_label_ = nullptr;
-  CommentLabel* comment_label_ = nullptr;
-
-  QListView* version_view_ = nullptr;
-  VersionListModel* version_model_ = nullptr;
-  QListView* package_view_ = nullptr;
-  PackageListModel* package_model_ = nullptr;
-
-  NavButton* next_button_ = nullptr;
+  SelectKernelFrame* select_kernel_frame_ = nullptr;
+  ServicesPackageFrame* services_package_frame_ = nullptr;
+  QStackedLayout* stacked_layout_ = nullptr;
 
  private slots:
-  // Update package list in package_view_ when new package is selected in
-  // version_view_.
-  void onVersionViewSelectionChanged(const QModelIndex& current,
-                                     const QModelIndex& previous);
+  void onSelectKernelFrameFinished();
 
-  // Update selected package list in version_view_ when package selection state
-  // is updated in package_view_.
-  void onPackageViewSelectionChanged(const QItemSelection& selected,
-                                     const QItemSelection& deselected);
-
-  // Save current package selection state when next_button_ is clicked.
-  void onNextButtonClicked();
+  // Show SelectKernelFrame.
+  void onServicesPackageFrameGoPrevious();
 };
 
 }  // namespace installer
