@@ -8,7 +8,7 @@ namespace installer {
 
 PackageListModel::PackageListModel(QObject* parent)
     : QAbstractListModel(parent),
-      packages_() {
+      package_list_(GetPackageList()) {
   this->setObjectName("package_list_model");
 }
 
@@ -18,7 +18,7 @@ QVariant PackageListModel::data(const QModelIndex& index, int role) const {
   }
 
   if (index.isValid()) {
-    return packages_.at(index.row());
+    return package_list_.items.at(index.row());
   } else {
     return QVariant();
   }
@@ -26,31 +26,20 @@ QVariant PackageListModel::data(const QModelIndex& index, int role) const {
 
 int PackageListModel::rowCount(const QModelIndex& parent) const {
   Q_UNUSED(parent);
-  return packages_.length();
+  return package_list_.items.length();
+}
+
+QString PackageListModel::getTitle() const {
+  return package_list_.title;
 }
 
 QString PackageListModel::getPackage(const QModelIndex& index) const {
   const int row = index.row();
-  if (index.isValid() && row < packages_.length()) {
-    return packages_.at(row);
+  if (index.isValid() && row < package_list_.items.length()) {
+    return package_list_.items.at(row);
   } else {
     return QString();
   }
-}
-
-QModelIndex PackageListModel::getPackageIndex(const QString& package) const {
-  const int row = packages_.indexOf(package);
-  if (row > -1) {
-    return this->index(row);
-  } else {
-    return QModelIndex();
-  }
-}
-
-void PackageListModel::setPackages(const QStringList& packages) {
-  this->beginResetModel();
-  packages_ = packages;
-  this->endResetModel();
 }
 
 }  // namespace installer

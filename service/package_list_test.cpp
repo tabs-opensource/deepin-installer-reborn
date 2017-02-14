@@ -11,7 +11,8 @@ namespace {
 
 TEST(PackageListTest, GetPackageList) {
   const PackageList list = GetPackageList();
-  EXPECT_EQ(list.length(), 2);
+  EXPECT_FALSE(list.title.isEmpty());
+  EXPECT_FALSE(list.items.isEmpty());
 }
 
 }  // namespace

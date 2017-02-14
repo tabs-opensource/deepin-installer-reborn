@@ -15,7 +15,7 @@ namespace installer {
 
 namespace {
 
-const char kPackageFile[] = RESOURCES_DIR "/packages.json";
+const char kPackageFile[] = RESOURCES_DIR "/select_services_packages.json";
 
 }  // namespace
 
@@ -28,25 +28,17 @@ PackageList GetPackageList() {
     return list;
   }
 
-  const QJsonArray package_list =
-      QJsonDocument::fromJson(content.toUtf8()).array();
-  for (const QJsonValue& package_value : package_list) {
-    const QJsonObject obj = package_value.toObject();
-    Package package;
-    package.name = obj.value("name").toString();
-    package.display_name = obj.value("displayName").toString();
+  const QJsonObject obj = QJsonDocument::fromJson(content.toUtf8()).object();
+  list.title = obj.value("title_name").toString();
 
-    const QJsonArray avail_packs = obj.value("availablePackages").toArray();
-    for (const QJsonValue& avail_pack : avail_packs) {
-      package.available_packages.append(avail_pack.toString());
-    }
+  const QJsonArray selected = obj.value("selected").toArray();
+  for (const QJsonValue& item : selected) {
+    list.selected.append(item.toInt());
+  }
 
-    const QJsonArray selected_packs = obj.value("selectedPackages").toArray();
-    for (const QJsonValue& selected_pack : selected_packs) {
-      package.selected_packages.append(selected_pack.toString());
-    }
-
-    list.append(package);
+  const QJsonArray items = obj.value("items").toArray();
+  for (const QJsonValue& item : items) {
+    list.items.append(item.toString());
   }
 
   return list;

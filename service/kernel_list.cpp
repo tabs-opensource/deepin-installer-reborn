@@ -17,14 +17,14 @@ namespace {
 
 const char kKernelFile[] = RESOURCES_DIR "/select_machine_kernel.json";
 
-}
+}  // namespace
 
 KernelList GetKernelList() {
   KernelList list;
 
   const QString content(ReadFile(kKernelFile));
   if (content.isEmpty()) {
-    qWarning() << "Failed to read package list file";
+    qWarning() << "Failed to read kernel list file";
     return list;
   }
 

@@ -10,14 +10,11 @@
 
 namespace installer {
 
-struct Package {
-  QString name;
-  QString display_name;
-  QStringList available_packages;
-  QStringList selected_packages;
+struct PackageList {
+  QString title;
+  QStringList items;
+  QList<int> selected;
 };
-
-typedef QList<Package> PackageList;
 
 // Read package list from json file.
 PackageList GetPackageList();

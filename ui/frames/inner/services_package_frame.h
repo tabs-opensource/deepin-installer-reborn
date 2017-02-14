@@ -29,6 +29,9 @@ class ServicesPackageFrame : public QFrame {
   // Emitted when previous_button_ is clicked.
   void goPrevious();
 
+ protected:
+  void changeEvent(QEvent* event) override;
+
  private:
   void initConnections();
   void initUI();

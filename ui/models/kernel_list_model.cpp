@@ -33,6 +33,15 @@ QString KernelListModel::getTitle() const {
   return kernel_list_.title;
 }
 
+QModelIndex KernelListModel::getSelectedKernel() const {
+  const int selected = kernel_list_.selected;
+  if (selected < 0 || selected >= kernel_list_.items.length()) {
+    return QModelIndex();
+  } else {
+    return this->index(selected);
+  }
+}
+
 QString KernelListModel::getKernelVersion(const QModelIndex& index) const {
   const int row = index.row();
   if (index.isValid() && row < kernel_list_.items.length()) {

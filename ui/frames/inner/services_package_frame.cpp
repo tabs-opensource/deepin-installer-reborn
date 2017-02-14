@@ -4,8 +4,10 @@
 
 #include "ui/frames/inner/services_package_frame.h"
 
+#include <QEvent>
 #include <QVBoxLayout>
 
+#include "service/settings_manager.h"
 #include "ui/frames/consts.h"
 #include "ui/models/package_list_model.h"
 #include "ui/views/frameless_list_view.h"
@@ -19,6 +21,15 @@ ServicesPackageFrame::ServicesPackageFrame(QWidget* parent) : QFrame(parent) {
 
   this->initUI();
   this->initConnections();
+}
+
+void ServicesPackageFrame::changeEvent(QEvent* event) {
+  if (event->type() == QEvent::LanguageChange) {
+    previous_button_->setText(tr("Previous"));
+    next_button_->setText(tr("Next"));
+  } else {
+    QFrame::changeEvent(event);
+  }
 }
 
 void ServicesPackageFrame::initConnections() {
@@ -37,28 +48,32 @@ void ServicesPackageFrame::initUI() {
 
   package_view_ = new FramelessListView();
   package_view_->setObjectName("package_view");
-  package_view_->setFixedWidth(519);
   package_model_ = new PackageListModel();
   package_view_->setModel(package_model_);
   // Enable multi-selection.
   package_view_->setSelectionMode(QAbstractItemView::MultiSelection);
 
+  // Select default packages.
+
+  // Read title name from json file.
+  title_label_->setText(package_model_->getTitle());
+
   previous_button_ = new NavButton(tr("Previous"));
   next_button_ = new NavButton(tr("Next"));
 
   QVBoxLayout* layout = new QVBoxLayout();
-  layout->setContentsMargins(0, 0, 0, 0);
   layout->setSpacing(kMainLayoutSpacing);
   layout->addStretch();
   layout->addWidget(title_label_, 0, Qt::AlignHCenter);
   layout->addStretch();
+  layout->addWidget(package_view_, 0, Qt::AlignHCenter);
+  layout->addStretch();
   layout->addWidget(previous_button_, 0, Qt::AlignHCenter);
-  layout->addSpacing(30);
+  layout->addSpacing(15);
   layout->addWidget(next_button_, 0, Qt::AlignHCenter);
 
   this->setLayout(layout);
 }
-
 
 void ServicesPackageFrame::onPackageViewSelectionChanged(
     const QItemSelection& selected, const QItemSelection& deselected) {
@@ -73,8 +88,7 @@ void ServicesPackageFrame::onPackageViewSelectionChanged(
     selected_packages.append(package_model_->getPackage(index));
   }
 
-//  const QModelIndex index = kernel_view_->selectionModel()->currentIndex();
-//  version_model_->setSelectedPackages(selected_packages, index);
+  WritePackageList(selected_packages);
 }
 
 }  // namespace installer

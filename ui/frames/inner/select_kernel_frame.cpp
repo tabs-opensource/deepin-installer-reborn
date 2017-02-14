@@ -46,17 +46,17 @@ void SelectKernelFrame::initUI() {
   kernel_view_->setObjectName("kernel_view");
   kernel_model_ = new KernelListModel();
   kernel_view_->setModel(kernel_model_);
-  QSizePolicy list_policy(QSizePolicy::Fixed, QSizePolicy::MinimumExpanding);
-  kernel_view_->setSizePolicy(list_policy);
+
+  // Select default kernel.
+  const QModelIndex selected = kernel_model_->getSelectedKernel();
+  kernel_view_->selectionModel()->select(selected, QItemSelectionModel::Select);
 
   // Get title name from json file.
   title_label_->setText(kernel_model_->getTitle());
-  // Select default item.
 
   next_button_ = new NavButton(tr("Next"));
 
   QVBoxLayout* layout = new QVBoxLayout();
-  layout->setContentsMargins(0, 0, 0, 0);
   layout->setSpacing(kMainLayoutSpacing);
   layout->addStretch();
   layout->addWidget(title_label_, 0, Qt::AlignHCenter);

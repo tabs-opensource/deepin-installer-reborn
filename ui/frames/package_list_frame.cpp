@@ -49,22 +49,4 @@ void PackageListFrame::onServicesPackageFrameGoPrevious() {
   stacked_layout_->setCurrentWidget(select_kernel_frame_);
 }
 
-//
-//void PackageListFrame::onNextButtonClicked() {
-//  // Read all selected packages.
-//  const QModelIndexList selected_indexes =
-//      package_view_->selectionModel()->selectedIndexes();
-//  QStringList selected_packages;
-//  for (const QModelIndex& index : selected_indexes) {
-//    selected_packages.append(package_model_->getPackage(index));
-//  }
-//
-//  const QModelIndex index = kernel_view_->selectionModel()->currentIndex();
-//  const QString name =version_model_->getName(index);
-//
-//  WriteSelectedPackageList(name, selected_packages);
-//
-//  emit this->finished();
-//}
-
 }  // namespace installer

@@ -24,6 +24,10 @@ class KernelListModel : public QAbstractListModel {
   // Get title name.
   QString getTitle() const;
 
+  // Get index of default selected kernel.
+  // Returns -1 if not set.
+  QModelIndex getSelectedKernel() const;
+
   // Get kernel version at |index|.
   QString getKernelVersion(const QModelIndex& index) const;
 

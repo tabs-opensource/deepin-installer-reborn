@@ -7,6 +7,8 @@
 
 #include <QAbstractListModel>
 
+#include "service/package_list.h"
+
 namespace installer {
 
 // Model used in PackageListFrame to hold package names.
@@ -19,17 +21,14 @@ class PackageListModel : public QAbstractListModel {
   virtual QVariant data(const QModelIndex& index, int role) const override;
   virtual int rowCount(const QModelIndex& parent) const override;
 
+  // Get title name.
+  QString getTitle() const;
+
   // Get package name at |index|.
   QString getPackage(const QModelIndex& index) const;
 
-  // Get package index with |package| name.
-  QModelIndex getPackageIndex(const QString& package) const;
-
-  // Update package list.
-  void setPackages(const QStringList& packages);
-
  private:
-  QStringList packages_;
+  PackageList package_list_;
 };
 
 }  // namespace installer
