@@ -42,4 +42,17 @@ QString PackageListModel::getPackage(const QModelIndex& index) const {
   }
 }
 
+QModelIndexList PackageListModel::getSelectedPackages() const {
+  QModelIndexList list;
+
+  // Get index of selected packages.
+  for (const int item : package_list_.selected) {
+    if (item > -1 && item < package_list_.items.length()) {
+      list.append(this->index(item));
+    }
+  }
+
+  return list;
+}
+
 }  // namespace installer

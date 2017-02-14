@@ -54,6 +54,13 @@ void ServicesPackageFrame::initUI() {
   package_view_->setSelectionMode(QAbstractItemView::MultiSelection);
 
   // Select default packages.
+  QItemSelection selection;
+  const QModelIndexList selected_items = package_model_->getSelectedPackages();
+  for (const QModelIndex& index : selected_items) {
+    selection.select(index, index);
+  }
+  package_view_->selectionModel()->select(selection,
+                                          QItemSelectionModel::Select);
 
   // Read title name from json file.
   title_label_->setText(package_model_->getTitle());

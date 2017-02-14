@@ -27,6 +27,9 @@ class PackageListModel : public QAbstractListModel {
   // Get package name at |index|.
   QString getPackage(const QModelIndex& index) const;
 
+  // Get default selected packages.
+  QModelIndexList getSelectedPackages() const;
+
  private:
   PackageList package_list_;
 };
