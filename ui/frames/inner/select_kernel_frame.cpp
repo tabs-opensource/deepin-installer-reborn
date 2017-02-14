@@ -24,7 +24,11 @@ SelectKernelFrame::SelectKernelFrame(QWidget* parent) : QFrame(parent) {
 }
 
 void SelectKernelFrame::changeEvent(QEvent* event) {
-  QFrame::changeEvent(event);
+  if (event->type() == QEvent::LanguageChange) {
+    next_button_->setText(tr("Next"));
+  } else {
+    QFrame::changeEvent(event);
+  }
 }
 
 void SelectKernelFrame::initConnections() {
@@ -40,7 +44,6 @@ void SelectKernelFrame::initUI() {
 
   kernel_view_ = new FramelessListView();
   kernel_view_->setObjectName("kernel_view");
-  kernel_view_->setFixedWidth(340);
   kernel_model_ = new KernelListModel();
   kernel_view_->setModel(kernel_model_);
   QSizePolicy list_policy(QSizePolicy::Fixed, QSizePolicy::MinimumExpanding);
