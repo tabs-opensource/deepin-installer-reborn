@@ -376,22 +376,16 @@
 <context>
     <name>installer::PackageListFrame</name>
     <message>
-        <location filename="../ui/frames/package_list_frame.cpp" line="31"/>
-        <location filename="../ui/frames/package_list_frame.cpp" line="52"/>
         <source>Select Packages</source>
-        <translation>选择软件包</translation>
+        <translation type="vanished">选择软件包</translation>
     </message>
     <message>
-        <location filename="../ui/frames/package_list_frame.cpp" line="32"/>
-        <location filename="../ui/frames/package_list_frame.cpp" line="54"/>
         <source>Select OS type and packages to install</source>
-        <translation>选择要安装的系统类型和软件包名称</translation>
+        <translation type="vanished">选择要安装的系统类型和软件包名称</translation>
     </message>
     <message>
-        <location filename="../ui/frames/package_list_frame.cpp" line="33"/>
-        <location filename="../ui/frames/package_list_frame.cpp" line="93"/>
         <source>Next</source>
-        <translation>下一步</translation>
+        <translation type="vanished">下一步</translation>
     </message>
 </context>
 <context>
@@ -584,10 +578,34 @@
     </message>
 </context>
 <context>
+    <name>installer::SelectKernelFrame</name>
+    <message>
+        <location filename="../ui/frames/inner/select_kernel_frame.cpp" line="28"/>
+        <location filename="../ui/frames/inner/select_kernel_frame.cpp" line="57"/>
+        <source>Next</source>
+        <translation>下一步</translation>
+    </message>
+</context>
+<context>
     <name>installer::SelectLanguageFrame</name>
     <message>
-        <location filename="../ui/frames/select_language_frame.cpp" line="59"/>
-        <location filename="../ui/frames/select_language_frame.cpp" line="90"/>
+        <location filename="../ui/frames/select_language_frame.cpp" line="62"/>
+        <location filename="../ui/frames/select_language_frame.cpp" line="106"/>
+        <source>Next</source>
+        <translation>下一步</translation>
+    </message>
+</context>
+<context>
+    <name>installer::ServicesPackageFrame</name>
+    <message>
+        <location filename="../ui/frames/inner/services_package_frame.cpp" line="28"/>
+        <location filename="../ui/frames/inner/services_package_frame.cpp" line="68"/>
+        <source>Previous</source>
+        <translation>上一步</translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/services_package_frame.cpp" line="29"/>
+        <location filename="../ui/frames/inner/services_package_frame.cpp" line="69"/>
         <source>Next</source>
         <translation>下一步</translation>
     </message>
