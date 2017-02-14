@@ -8,7 +8,7 @@ namespace installer {
 
 KernelListModel::KernelListModel(QObject* parent)
     : QAbstractListModel(parent),
-      package_list_(GetPackageList()) {
+      kernel_list_(GetKernelList()) {
   this->setObjectName("kernel_list_model");
 }
 
@@ -18,7 +18,7 @@ QVariant KernelListModel::data(const QModelIndex& index, int role) const {
   }
 
   if (index.isValid()) {
-    return package_list_.at(index.row()).display_name;
+    return kernel_list_.items.at(index.row());
   } else {
     return QVariant();
   }
@@ -26,43 +26,19 @@ QVariant KernelListModel::data(const QModelIndex& index, int role) const {
 
 int KernelListModel::rowCount(const QModelIndex& parent) const {
   Q_UNUSED(parent);
-  return package_list_.length();
+  return kernel_list_.items.length();
 }
 
-QString KernelListModel::getName(const QModelIndex& index) const {
+QString KernelListModel::getTitle() const {
+  return kernel_list_.title;
+}
+
+QString KernelListModel::getKernelVersion(const QModelIndex& index) const {
   const int row = index.row();
-  if (index.isValid() && row < package_list_.length()) {
-    return package_list_.at(row).name;
+  if (index.isValid() && row < kernel_list_.items.length()) {
+    return kernel_list_.items.at(row);
   } else {
     return QString();
-  }
-}
-
-QStringList KernelListModel::getAvailablePackages(
-    const QModelIndex& index) const {
-  const int row = index.row();
-  if (index.isValid() && row < package_list_.length()) {
-    return package_list_.at(row).available_packages;
-  } else {
-    return QStringList();
-  }
-}
-
-QStringList KernelListModel::getSelectedPackages(
-    const QModelIndex& index) const {
-  const int row = index.row();
-  if (index.isValid() && row < package_list_.length()) {
-    return package_list_.at(row).selected_packages;
-  } else {
-    return QStringList();
-  }
-}
-
-void KernelListModel::setSelectedPackages(const QStringList& selected_packages,
-                                           const QModelIndex& index) {
-  const int row = index.row();
-  if (index.isValid() && row < package_list_.length()) {
-    package_list_[row].selected_packages = selected_packages;
   }
 }
 

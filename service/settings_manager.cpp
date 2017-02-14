@@ -286,11 +286,13 @@ void WriteRequiringSwapFile(bool is_required) {
   AppendToConfigFile("DI_SWAP_FILE_REQUIRED", is_required);
 }
 
-void WriteSelectedPackageList(const QString& name,
-                              const QStringList& packages) {
-  AppendToConfigFile("DI_SW_OS_NAME", name);
+void WriteKernelVersion(const QString& kernel_version) {
+  AppendToConfigFile("SELECTED_MACHINE_KERNEL", kernel_version);
+}
+
+void WritePackageList(const QStringList& packages) {
   // Join package list with semicolons.
-  AppendToConfigFile("DI_SW_SELECTED_PACKAGES", packages.join(";"));
+  AppendToConfigFile("SELECTED_SERVICES_PACKAGES", packages.join(";"));
 }
 
 void AddConfigFile() {

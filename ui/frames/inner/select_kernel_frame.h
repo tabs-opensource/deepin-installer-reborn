@@ -35,7 +35,7 @@ class SelectKernelFrame : public QFrame {
 
   TitleLabel* title_label_ = nullptr;
   QListView* kernel_view_ = nullptr;
-  KernelListModel* version_model_ = nullptr;
+  KernelListModel* kernel_model_ = nullptr;
   NavButton* next_button_ = nullptr;
 
  private slots:

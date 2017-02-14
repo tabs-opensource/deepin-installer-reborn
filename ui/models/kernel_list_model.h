@@ -7,11 +7,11 @@
 
 #include <QAbstractListModel>
 
-#include "service/package_list.h"
+#include "service/kernel_list.h"
 
 namespace installer {
 
-// Model used in PackageListModel to hold system type.
+// Model used in SelectKernelFrame to hold kernel type.
 class KernelListModel : public QAbstractListModel {
   Q_OBJECT
 
@@ -21,21 +21,14 @@ class KernelListModel : public QAbstractListModel {
   virtual QVariant data(const QModelIndex& index, int role) const override;
   virtual int rowCount(const QModelIndex& parent) const override;
 
-  // Get version name at |index|.
-  QString getName(const QModelIndex& index) const;
+  // Get title name.
+  QString getTitle() const;
 
-  // Get available packages at |index|.
-  QStringList getAvailablePackages(const QModelIndex& index) const;
-
-  // Get selected packages at |index|.
-  QStringList getSelectedPackages(const QModelIndex& index) const;
-
-  // Update selected package list at |index|.
-  void setSelectedPackages(const QStringList& selected_packages,
-                           const QModelIndex& index);
+  // Get kernel version at |index|.
+  QString getKernelVersion(const QModelIndex& index) const;
 
  private:
-  PackageList package_list_;
+  KernelList kernel_list_;
 };
 
 }  // namespace installer

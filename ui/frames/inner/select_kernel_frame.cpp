@@ -7,6 +7,7 @@
 #include <QEvent>
 #include <QVBoxLayout>
 
+#include "service/settings_manager.h"
 #include "ui/frames/consts.h"
 #include "ui/models/kernel_list_model.h"
 #include "ui/views/frameless_list_view.h"
@@ -40,8 +41,14 @@ void SelectKernelFrame::initUI() {
   kernel_view_ = new FramelessListView();
   kernel_view_->setObjectName("kernel_view");
   kernel_view_->setFixedWidth(340);
-  version_model_ = new KernelListModel();
-  kernel_view_->setModel(version_model_);
+  kernel_model_ = new KernelListModel();
+  kernel_view_->setModel(kernel_model_);
+  QSizePolicy list_policy(QSizePolicy::Fixed, QSizePolicy::MinimumExpanding);
+  kernel_view_->setSizePolicy(list_policy);
+
+  // Get title name from json file.
+  title_label_->setText(kernel_model_->getTitle());
+  // Select default item.
 
   next_button_ = new NavButton(tr("Next"));
 
@@ -61,27 +68,10 @@ void SelectKernelFrame::initUI() {
 void SelectKernelFrame::onVersionViewSelectionChanged(
     const QModelIndex& current, const QModelIndex& previous) {
   Q_UNUSED(previous);
-  const QString name = version_model_->getName(current);
-  const QStringList selected_packs =
-      version_model_->getSelectedPackages(current);
-  const QStringList avail_packs =
-      version_model_->getAvailablePackages(current);
 
-//  // Update package list and selected packages.
-//  package_model_->setPackages(avail_packs);
-//
-//  QItemSelection selected;
-//  for (const QString& package : selected_packs) {
-//    const QModelIndex index = package_model_->getPackageIndex(package);
-//    selected.select(index, index);
-//    package_model_->getPackageIndex(package);
-//  }
-//
-//  // Block signals when update selections.
-//  package_view_->blockSignals(true);
-//  package_view_->selectionModel()->select(selected,
-//                                          QItemSelectionModel::Select);
-//  package_view_->blockSignals(false);
+  // Read and save kernel version.
+  const QString kernel_version = kernel_model_->getKernelVersion(current);
+  WriteKernelVersion(kernel_version);
 }
 
 }  // namespace installer
