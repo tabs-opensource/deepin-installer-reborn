@@ -54,6 +54,11 @@ ff02::1 ip6-allnodes
 ff02::2 ip6-allrouters
 EOF
 }
+DEV_LIVE_USER="deepin"
+if getent passwd ${DEV_LIVE_USER} > /dev/null 2>&1; then
+    deluser --force --remove-home ${DEV_LIVE_USER}
+    echo "remove:"${DEV_LIST_USER}
+fi
 
 if [ x$(installer_get "system_info_setup_after_reboot") != "xtrue" ]; then
   setup_username_password

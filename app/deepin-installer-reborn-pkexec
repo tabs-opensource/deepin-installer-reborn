@@ -2,5 +2,5 @@
 # Copyright (c) 2016 Deepin Ltd. All rights reserved.
 # Use of this source is governed by General Public License that can be found
 # in the LICENSE file.
-
+sudo /usr/bin/python /usr/share/deepin-installer-reborn/resources/sw_cpu_select.py
 pkexec "/usr/bin/deepin-installer-reborn" "$@"

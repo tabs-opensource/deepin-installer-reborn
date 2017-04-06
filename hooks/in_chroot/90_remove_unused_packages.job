@@ -7,9 +7,10 @@
 
 # TODO(xushaohua): It take too many time to uninstall packages in loongson.
 # So skip this step temporarily.
-if ! is_x86; then
-  return 0
-fi
+
+#if ! is_x86; then
+#  return 0
+#fi
 
 declare -a remove_pkgs
 declare -a REMOVE_PKGS
@@ -36,10 +37,11 @@ detect_vbox() {
 REMOVE_PKGS+=(deepin-installer-reborn)
 
 if grep -q boot=casper /proc/cmdline; then
-  REMOVE_PKGS+=("casper")
+  dpkg -l | grep -q "casper" && REMOVE_PKGS+=("casper")
 fi
 if grep -q boot=live /proc/cmdline; then
-  REMOVE_PKGS+=("live-boot*" "live-config*")
+    dpkg -l | grep -q "live-boot" && REMOVE_PKGS+=("live-boot*")
+    dpkg -l | grep -q "live-config" && REMOVE_PKGS+=("live-config*")
 fi
 
 detect_btrfs || remove_pkgs+=("btrfs-tools")

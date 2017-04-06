@@ -1,3 +1,38 @@
+deepin-installer-reborn (1:0.0.1+kui14) testing; urgency=medium
+
+  * modify iso data struct 
+  * add remove deepin user data
+  * new copy sw boot data function
+
+ -- Deepin Package Builder <packages@deepin-pc>  Tue, 07 Mar 2017 14:57:19 +0800
+
+deepin-installer-reborn (1:0.0.1+kui11) testing; urgency=medium
+
+  * Non-maintainer upload.
+  * update open remove installer in sw64
+  * fix install depends
+
+ -- Deepin Package Builder <packages@deepin-pc>  Wed, 01 Mar 2017 11:38:54 +0800
+
+deepin-installer-reborn (1:0.0.1+kui6) testing; urgency=medium
+
+  * add sw64 cpu select
+  * modify app/deepin-install-reborn-pkexec
+  * fix run in sw cpu select in pkexec
+  * add sw64 select dialog to sh method
+  * fix sw64 run select dialog to sh method in chroot env
+  * add pkexec non-input password
+  * update hook in sw64 install
+
+ --  Deepin Package Builder <packages@deepin-pc>  Fri, 17 Feb 2017 13:56:34 +0800
+
+deepin-installer-reborn (0.0.1+kui1) testing; urgency=medium
+
+  * Non-maintainer upload.
+  * modify Desktop files
+
+ --  Deepin Package Builder <packages@deepin-pc>  Fri, 17 Feb 2017 13:56:34 +0800
+
 deepin-installer-reborn (0.0.1) unstable; urgency=medium
 
   * Initial release 

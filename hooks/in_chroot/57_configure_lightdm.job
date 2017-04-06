@@ -10,6 +10,8 @@
 mv /lib/systemd/system/lightdm.service_back /lib/systemd/system/lightdm.service
 ln -s /lib/systemd/system/lightdm.service /etc/systemd/system/display-manager.service
 
+exit 0
+
 cat > /etc/X11/default-display-manager <<EOF
 /usr/sbin/lightdm
 EOF

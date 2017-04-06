@@ -1,0 +1,6 @@
+[Run deepin-installer without asking password]
+Identity=unix-group:sudo
+Action=com.deepin.pkexec.installer
+ResultAny=no
+ResultInactive=no
+ResultActive=yes
