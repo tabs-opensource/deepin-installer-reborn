@@ -34,16 +34,7 @@ class MultiHeadManager : public QObject {
   void primaryScreenChanged(const QRect& geometry);
 
  private:
-  void initConnections();
-
   QList<WallpaperItem*> wallpaper_items_;
-  QThread* multi_head_thread_ = nullptr;
-  MultiHeadWorker* multi_head_worker_ = nullptr;
-  QString xrandr_output_;
-
- private slots:
-  // Repaint background when output added, changed or removed.
-  void onScreenCountChanged();
 };
 
 }  // namespace installer
