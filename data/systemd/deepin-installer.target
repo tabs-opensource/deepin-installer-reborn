@@ -6,7 +6,7 @@
 #  (at your option) any later version.
 
 [Unit]
-Description=Deepin Installer
+Description=Whirlwind Installer
 Documentation=man:systemd.special(7)
 Requires=basic.target
 Conflicts=rescue.service rescue.target
