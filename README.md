@@ -1,5 +1,5 @@
 # About
-Deepin Installer, release version.
+Whirlwind Installer, based on deepin release version.
 
 # Dependencies
 * Qt 5.5+
