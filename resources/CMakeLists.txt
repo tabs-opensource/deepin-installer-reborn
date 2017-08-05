@@ -50,7 +50,7 @@ elseif(${INSTALLER_BUILD_ARCH} MATCHES "mips")
           RENAME default_settings.ini
           )
 else()
-  message(FATAL_ERROR "Not supportted architecture: ${INSTALLER_BUILD_ARCH}")
+  message(FATAL_ERROR "Architecture not supported: ${INSTALLER_BUILD_ARCH}")
 endif ()
 
 add_subdirectory(slide)
