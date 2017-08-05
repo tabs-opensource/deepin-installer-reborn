@@ -14,5 +14,5 @@ usr/share/deepin-installer/i18n/*
 usr/share/deepin-installer/resources/*
 usr/share/deepin-installer/tools/*
 usr/share/doc/*
-usr/share/icons/hicolor/scalable/apps/deepin-installer.svg
+usr/share/icons/hicolor/scalable/apps/whirlwind-installer.svg
 usr/share/polkit-1/actions/*
