@@ -1,9 +1,9 @@
 [desktop]
 Categories=Settings;
-Comment=OEM tool for deepin installer
+Comment=OEM tool for whirlwind installer
 Exec=deepin-installer-oem
 Icon=deepin-installer-oem
-Name=Deepin Installer OEM
+Name=Whirlwind Installer OEM
 StartupNotify=false
 Terminal=false
 Type=Application
