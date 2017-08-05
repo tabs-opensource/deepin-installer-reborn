@@ -17,13 +17,13 @@ install(
 )
 
 install(
-    FILES ${CMAKE_CURRENT_SOURCE_DIR}/deepin-installer-oem.desktop
+    FILES ${CMAKE_CURRENT_SOURCE_DIR}/whirlwind-installer-oem.desktop
     ${CMAKE_CURRENT_SOURCE_DIR}/deepin-installer.desktop
     DESTINATION ${CMAKE_INSTALL_PREFIX}/share/applications
 )
 
 install(
-    FILES ${CMAKE_CURRENT_SOURCE_DIR}/deepin-installer-oem.svg
+    FILES ${CMAKE_CURRENT_SOURCE_DIR}/whirlwind-installer-oem.svg
     ${CMAKE_CURRENT_SOURCE_DIR}/deepin-installer.svg
     DESTINATION ${CMAKE_INSTALL_PREFIX}/share/icons/hicolor/scalable/apps
 )
